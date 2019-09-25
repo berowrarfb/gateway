@@ -37,6 +37,11 @@ import adafruit_vl6180x
 class sensor_vl6180x():
 	'''
 	'''
+
+	status = {'red' : False, 'green' : False, 'blue' : False}
+	
+	def __init__(self, status=None):
+		self.status = status
 	
 	def on_activate(self):
 		'''
@@ -46,6 +51,11 @@ class sensor_vl6180x():
 	 
 		# Create sensor instance.
 		self.sensor = adafruit_vl6180x.VL6180X(i2c)
+
+	def get_status(self):
+		'''
+		'''
+		return self.status
 		
 	def get_range(self):
 		'''
