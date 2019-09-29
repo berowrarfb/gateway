@@ -1,12 +1,7 @@
 # Demo of reading the range and lux from the VL6180x distance sensor and
 # printing it every second.
 # Author: Tony DiCola
-import time
- 
-import board
-import busio
- 
-import adafruit_vl6180x
+
  
  
 # Create I2C bus.
@@ -37,20 +32,29 @@ import adafruit_vl6180x
 class sensor_vl6180x():
 	'''
 	'''
+	
+	import time
+
 
 	status = {'red' : False, 'green' : False, 'blue' : False}
 	
-	def __init__(self, status=None):
+	def __init__(self, status=status):
 		self.status = status
-	
+		
+		# self.on_activate(self)
+
 	def on_activate(self):
 		'''
 		'''
+		import board
+		import busio
+		import adafruit_vl6180x
+	
 		# Create I2C bus.
 		self.i2c = busio.I2C(board.SCL, board.SDA)
 	 
 		# Create sensor instance.
-		self.sensor = adafruit_vl6180x.VL6180X(i2c)
+		self.sensor = adafruit_vl6180x.VL6180X(self.i2c)
 
 	def get_status(self):
 		'''
@@ -60,13 +64,14 @@ class sensor_vl6180x():
 	def get_range(self):
 		'''
 		'''
-		range_mm = sensor.range
+		range_mm = self.sensor.range
 		return range_mm
 		
 	def get_lux(self):
 		'''
 		'''
-		light_lux = sensor.read_lux(adafruit_vl6180x.ALS_GAIN_1)
+		import adafruit_vl6180x
+		
+		light_lux = self.sensor.read_lux(adafruit_vl6180x.ALS_GAIN_1)
 		return light_lux
 		
-	on_activate(self)
