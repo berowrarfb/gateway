@@ -27,3 +27,27 @@ print("LED off")
 GPIO.output(pin_led_blue,GPIO.LOW)
 GPIO.output(pin_led_red,GPIO.LOW)
 GPIO.output(pin_led_green,GPIO.LOW)
+
+class led_breakout_kit11588():
+    '''
+    '''
+
+    status = {'red' : False, 'green' : False, 'blue' : False}
+
+    # init pins
+    _pin_led_blue = 18
+    _pin_led_red = 23
+    _pin_led_green = 24
+	
+	def __init__(self, status=status):
+		self.status = status
+
+    def get_status(self):
+		'''
+		'''
+		return self.status
+
+    # def led_on(self, colour):
+    #     '''
+    #     '''
+    #     if colour == 'red':
