@@ -36,7 +36,7 @@ class sensor_vl6180x():
 	import time
 
 
-	status = {'red' : False, 'green' : False, 'blue' : False}
+	status = {'red' : False, 'green' : False, 'blue' : False}  # TODO adapt for hardware
 	
 	def __init__(self, status=status):
 		self.status = status
