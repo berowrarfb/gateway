@@ -2,52 +2,94 @@ import RPi.GPIO as GPIO
 import time
 
 # init
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setwarnings(False)
 
 # init pins
-pin_led_blue = 18
-pin_led_red = 23
-pin_led_green = 24
+#pin_led_blue = 18
+#pin_led_red = 23
+#pin_led_green = 24
 
-GPIO.setup(pin_led_blue,GPIO.OUT)
-GPIO.setup(pin_led_red,GPIO.OUT)
-GPIO.setup(pin_led_green,GPIO.OUT)
-
-
-print("LED on")
-GPIO.output(pin_led_blue,GPIO.HIGH)
-GPIO.output(pin_led_red,GPIO.HIGH)
-GPIO.output(pin_led_green,GPIO.HIGH)
+#GPIO.setup(pin_led_blue,GPIO.OUT)
+#GPIO.setup(pin_led_red,GPIO.OUT)
+#GPIO.setup(pin_led_green,GPIO.OUT)
 
 
-time.sleep(1)
+#print("LED on")
+#GPIO.output(pin_led_blue,GPIO.HIGH)
+#GPIO.output(pin_led_red,GPIO.HIGH)
+#PIO.output(pin_led_green,GPIO.HIGH)
 
-print("LED off")
-GPIO.output(pin_led_blue,GPIO.LOW)
-GPIO.output(pin_led_red,GPIO.LOW)
-GPIO.output(pin_led_green,GPIO.LOW)
+#time.sleep(1)
 
-#class led_breakout_kit11588():
-#    '''
-#    '''
+#print("LED off")
+#GPIO.output(pin_led_blue,GPIO.LOW)
+#GPIO.output(pin_led_red,GPIO.LOW)
+#GPIO.output(pin_led_green,GPIO.LOW)
 
-    #status = {'red' : False, 'green' : False, 'blue' : False}
+class led_breakout_kit11588():
+    '''
+    '''
+
+    status = {'red' : False, 'green' : False, 'blue' : False}
 
     # init pins
-    #_pin_led_blue = 18
-    #_pin_led_red = 23
-    #_pin_led_green = 24
+    _pin_led_blue = 18
+    _pin_led_red = 23
+    _pin_led_green = 24
 	
-    #def __init__(self, status=status):
-	#self.status = status
+    def __init__(self, status=status):
+        self.status = status
+        self.on_activate()
+	
+    def on_activate(self):
+        ''' Init the device hardware
+        '''
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+	
+        GPIO.setup(self._pin_led_blue, GPIO.OUT)
+        GPIO.setup(self._pin_led_red, GPIO.OUT)
+        GPIO.setup(self._pin_led_green, GPIO.OUT)
 
-    #def get_status(self):
-#	'''
-#	'''
-	#return self.status
+    def get_status(self):
+        ''' Return the status dict of the LEDs
+        '''
+        return self.status
 
-    # def led_on(self, colour):
-    #     '''
-    #     '''
-    #     if colour == 'red':
+    def set_led(self, new_status_dict):
+        ''' Update the LED status dict
+        '''
+        for colour in new_status_dict:
+            if colour == 'red':
+                if new_status_dict[colour] is True:
+                    GPIO.output(self._pin_led_red, GPIO.HIGH)
+                    self.status['red'] = True
+                else:
+                    GPIO.output(self._pin_led_red, GPIO.LOW)
+                    self.status['red'] = False
+		    
+            elif colour == 'green':
+                if new_status_dict[colour] is True:
+                    GPIO.output(self._pin_led_green, GPIO.HIGH)
+                    self.status['green'] = True
+                else:
+                    GPIO.output(self._pin_led_green, GPIO.LOW)
+                    self.status['green'] = False
+		    
+            elif colour == 'blue':
+                if new_status_dict[colour] is True:
+                    GPIO.output(self._pin_led_blue, GPIO.HIGH)
+                    self.status['blue'] = True
+                else:
+                    GPIO.output(self._pin_led_blue, GPIO.LOW)
+                    self.status['blue'] = False
+            elif colour == 'all':
+                if new_status_dict[colour] is True:
+                    GPIO.output(self._pin_led_red, GPIO.HIGH)
+                    GPIO.output(self._pin_led_green, GPIO.HIGH)
+                    GPIO.output(self._pin_led_blue, GPIO.HIGH)
+                else:
+                    GPIO.output(self._pin_led_red, GPIO.LOW)
+                    GPIO.output(self._pin_led_green, GPIO.LOW)
+                    GPIO.output(self._pin_led_blue, GPIO.LOW)
