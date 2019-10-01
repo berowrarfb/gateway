@@ -9,10 +9,9 @@ class sensor_vl6180x():
 		range sensor.
 	'''
 	
-	def __init__(self, status=status):
+	def __init__(self):
 		'''
 		'''
-		self.status = status
 		
 		self.on_activate()
 
