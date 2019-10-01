@@ -29,26 +29,29 @@
     # Delay for a second.
 #    time.sleep(1.0)
 
+import board
+import busio
+import adafruit_vl6180x
+
+import adafruit_vl6180x
+
 class sensor_vl6180x():
 	'''
 	'''
 	
 	import time
 
-
 	status = {'red' : False, 'green' : False, 'blue' : False}  # TODO adapt for hardware
 	
 	def __init__(self, status=status):
 		self.status = status
 		
-		# self.on_activate(self)
+		self.on_activate()
 
 	def on_activate(self):
 		'''
 		'''
-		import board
-		import busio
-		import adafruit_vl6180x
+		
 	
 		# Create I2C bus.
 		self.i2c = busio.I2C(board.SCL, board.SDA)
@@ -70,7 +73,7 @@ class sensor_vl6180x():
 	def get_lux(self):
 		'''
 		'''
-		import adafruit_vl6180x
+		
 		
 		light_lux = self.sensor.read_lux(adafruit_vl6180x.ALS_GAIN_1)
 		return light_lux
