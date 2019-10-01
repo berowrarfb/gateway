@@ -39,13 +39,13 @@ class led_breakout_kit11588():
     _pin_led_red = 23
     _pin_led_green = 24
 	
-	def __init__(self, status=status):
-		self.status = status
+    def __init__(self, status=status):
+	self.status = status
 
     def get_status(self):
-		'''
-		'''
-		return self.status
+	'''
+	'''
+	return self.status
 
     # def led_on(self, colour):
     #     '''
