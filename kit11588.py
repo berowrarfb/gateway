@@ -15,6 +15,7 @@ class led_breakout_kit11588():
     def __init__(self, status=status):
         self.status = status
         self.on_activate()
+        self.set_led({'all':False})
 	
     def on_activate(self):
         ''' Init the device hardware
