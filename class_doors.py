@@ -27,3 +27,21 @@ class motor_door:
             print('Unable to change status')
         else:
             self.__status = status
+
+class regular_door:
+
+    allowed_status_list = ['Open', 'Closed']
+
+    def __init__(self, status):
+        self.status = status
+
+    @property
+    def status(self):
+        return self.__status
+
+    @status.setter
+    def status(self, status):
+        if status not in self.allowed_status_list:
+            print('Unable to change status')
+        else:
+            self.__status = status
